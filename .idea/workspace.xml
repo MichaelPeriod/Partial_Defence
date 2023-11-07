@@ -4,11 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab114fcc-5367-4e2a-ac83-b6ad9601d5b8" name="Changes" comment="Init">
-      <change afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GameView.java" afterDir="false" />
+    <list default="true" id="ab114fcc-5367-4e2a-ac83-b6ad9601d5b8" name="Changes" comment="Started framework for display">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RenderInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SpriteInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SpriteSheetReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/T_Grass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/T_Wall.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/res/SpriteSheet.ase" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/res/SpriteSheet.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +29,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -38,8 +51,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "C:/Users/micha/OneDrive/Documents/Coding Projects/Java/Cold-Conquest",
     "node.js.detected.package.eslint": "true",
@@ -71,7 +86,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699310250519</updated>
-      <workItem from="1699310251807" duration="3183000" />
+      <workItem from="1699310251807" duration="3235000" />
+      <workItem from="1699384845151" duration="11217000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1699310590194</created>
@@ -80,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699310590194</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Started framework for display">
+      <created>1699313511392</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1699313511392</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,7 +133,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Init" />
-    <option name="LAST_COMMIT_MESSAGE" value="Init" />
+    <MESSAGE value="Started framework for display" />
+    <option name="LAST_COMMIT_MESSAGE" value="Started framework for display" />
   </component>
 </project>

@@ -4,19 +4,22 @@ import java.awt.*;
 public class Client extends JPanel implements Runnable {
     public final int pixelSize = 4;
     public final int tileSize = 16;
-    public final int screenWidth = 16*pixelSize*tileSize;
-    public final int screenHeight = 9*pixelSize*tileSize;
+    public final int tileSizeInPixels = pixelSize * tileSize;
+    public final Point tileMapSize;
+    public final Point screenSize;
     public final int FPS = 60;
 
-    public Client(){
+    public Client(Point _tileMapSize){
+        tileMapSize = _tileMapSize;
+        screenSize = new Point(tileMapSize.x * tileSizeInPixels,
+                               tileMapSize.y * tileSizeInPixels);
         //Set up window on initialization
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.red);
+        this.setPreferredSize(new Dimension(screenSize.x, screenSize.y));
         this.setDoubleBuffered(true);
-//        this.addKeyListener(InputManager.current());
-//        this.addMouseListener(InputManager.current());
-//        this.addMouseMotionListener(InputManager.current());
         this.setFocusable(true);
+//      this.addKeyListener(InputManager.current());
+//      this.addMouseListener(InputManager.current());
+//      this.addMouseMotionListener(InputManager.current());
     }
 
     public void Setup(){
@@ -31,14 +34,13 @@ public class Client extends JPanel implements Runnable {
         super.paint(g);
     }
 
-    public void run(){
+    public void run(){ //Update frame
         //Declare variables
         final double drawInterval = 1000000000/(float)FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
         long timer;
-        int totalFrames = 0;
 
         while(true){
             //Get time
@@ -53,7 +55,6 @@ public class Client extends JPanel implements Runnable {
             //Draw frame and restart time till next frame
             repaint();
             delta--;
-            totalFrames++;
         }
     }
 }

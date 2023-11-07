@@ -9,16 +9,6 @@ public class Application {
         window.setResizable(false);
         window.setTitle("Partial Defence");
 
-        //Add a window to console
-        GameView gw = new GameView();
-        window.add(gw);
-
-        //Display window
-        window.pack();
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
-
-        //Run game
-        gw.Setup();
+        new Controller(window);
     }
 }
