@@ -1,12 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Queue;
 
 public class Controller implements Runnable {
-    final int tickRate = 128;
-    final Point tileMapSize = new Point(16, 9);
+    private final int tickRate = 128;
+    private final Point tileMapSize = new Point(16, 9);
+    private final boolean isRunning = true;
 
-    final GameView view;
-    final Model model;
+    private final GameView view;
+    private final Model model;
 
     public Controller(JFrame window){
         //Add a window to console
@@ -20,8 +22,7 @@ public class Controller implements Runnable {
 
         //Build Model and View
         model = new Model(tileMapSize);
-        model.GrassFill();
-        model.SetTile(new T_Wall(new Point(0, 0)), 0, 0);
+        model.getTilemap(0).GrassFill();
 
         view.Setup();
 
@@ -37,7 +38,7 @@ public class Controller implements Runnable {
         long currentTime;
         long timer;
 
-        while(true){
+        while(isRunning){
             //Get time
             currentTime = System.nanoTime();
 
@@ -47,14 +48,35 @@ public class Controller implements Runnable {
             lastTime = currentTime;
             if(delta <= 1) continue;
 
+            HandleInputs();
             model.Update();
-
-            for(RenderInfo r : model.getRenderInfo()){
-                view.addToQueue(r);
-            }
+            UpdateScreen();
 
             //Draw frame and restart time till next frame
             delta--;
+        }
+    }
+
+    private void HandleInputs(){
+        Queue<InputInfo> inputs = view.getInputQueue();
+
+        while(!inputs.isEmpty()){
+            InputInfo i = inputs.poll();
+
+            switch (i.input){
+                case Click -> {
+                    Point screenPos = i.mouseEvent.getPoint();
+                    Point tilePos = view.screenPosToTilePos(screenPos);
+
+                    model.getTilemap(1).SetTile(new T_Wall(tilePos), tilePos);
+                }
+            }
+        }
+    }
+
+    private void UpdateScreen(){
+        for(RenderInfo r : model.getTileUpdates()){
+            view.addToQueue(r);
         }
     }
 
