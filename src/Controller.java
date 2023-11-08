@@ -5,6 +5,7 @@ import View.GameView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.Queue;
 
 public class Controller implements Runnable {
@@ -27,7 +28,7 @@ public class Controller implements Runnable {
 
         //Build Model.Model and View
         model = new Model(tileMapSize);
-        model.getTilemap(0).GrassFill();
+        model.getTilemap(Model.Layer.Ground).GrassFill();
 
         view.Setup();
 
@@ -73,7 +74,11 @@ public class Controller implements Runnable {
                     Point screenPos = i.mouseEvent.getPoint();
                     Point tilePos = view.screenPosToTilePos(screenPos);
 
-                    model.getTilemap(1).SetTile(new T_Wall(tilePos), tilePos);
+                    if(i.mouseEvent.getButton() == MouseEvent.BUTTON1)
+                        model.setTile(Model.Layer.Main, new T_Wall(tilePos));
+                    else if(i.mouseEvent.getButton() == MouseEvent.BUTTON3) {
+                        model.clearTile(Model.Layer.Main, tilePos);
+                    }
                 }
             }
         }

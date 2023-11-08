@@ -55,13 +55,11 @@ public class GameView extends Client {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getButton() == MouseEvent.BUTTON1){
-            InputInfo i = new InputInfo(InputInfo.InputType.Click,
-                    true,
-                    e.getPoint().toString());
-            i.setMouseEvent(e);
-            inputQueue.add(i);
-        }
+        InputInfo i = new InputInfo(InputInfo.InputType.Click,
+             true,
+                      e.getPoint().toString());
+        i.setMouseEvent(e);
+        inputQueue.add(i);
     }
 
     @Override

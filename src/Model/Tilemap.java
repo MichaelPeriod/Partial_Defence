@@ -29,11 +29,18 @@ public class Tilemap {
         return tiles[pos.x][pos.y];
     }
 
-    public void SetTile(Tile t, Point pos){
+    public void SetTile(Tile t){
+        if(t.getTilePos().x >= mapSize.x || t.getTilePos().x < 0 ||
+                t.getTilePos().y < 0 || t.getTilePos().y >= mapSize.y)
+            return;
+        tiles[t.getTilePos().x][t.getTilePos().y] = t;
+    }
+
+    public void ClearTile(Point pos){
         if(pos.x >= mapSize.x || pos.x < 0 ||
                 pos.y < 0 || pos.y >= mapSize.y)
             return;
-        tiles[pos.x][pos.y] = t;
+        tiles[pos.x][pos.y] = null;
     }
 
     public Tile[][] GetAllTiles(){
@@ -44,7 +51,7 @@ public class Tilemap {
         for(int i = 0; i < mapSize.x; i++){
             for(int j = 0; j < mapSize.y; j++){
                 Point pos = new Point(i, j);
-                SetTile(new T_Grass(pos), pos);
+                SetTile(new T_Grass(pos));
             }
         }
     }
