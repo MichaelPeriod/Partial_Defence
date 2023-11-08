@@ -1,3 +1,5 @@
+package DataPackets;
+
 import java.awt.*;
 
 public interface SpriteInfo {

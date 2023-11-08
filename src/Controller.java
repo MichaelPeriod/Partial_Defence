@@ -1,3 +1,8 @@
+import DataPackets.*;
+import Model.Model;
+import Tiles.T_Wall;
+import View.GameView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Queue;
@@ -20,7 +25,7 @@ public class Controller implements Runnable {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-        //Build Model and View
+        //Build Model.Model and View
         model = new Model(tileMapSize);
         model.getTilemap(0).GrassFill();
 
@@ -75,8 +80,8 @@ public class Controller implements Runnable {
     }
 
     private void UpdateScreen(){
-        for(RenderInfo r : model.getTileUpdates()){
-            view.addToQueue(r);
+        for(RenderInfo renderInfo : model.getTileUpdates()){
+            view.addToQueue(renderInfo);
         }
     }
 

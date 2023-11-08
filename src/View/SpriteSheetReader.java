@@ -1,9 +1,12 @@
+package View;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
+import DataPackets.RenderInfo;
 
 public class SpriteSheetReader {
     private final String spriteSheetPos = "src/res/SpriteSheet.png";

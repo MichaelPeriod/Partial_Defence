@@ -1,3 +1,9 @@
+package Model;
+
+import Tiles.T_Grass;
+import Tiles.Tile;
+import DataPackets.RenderInfo;
+
 import java.awt.*;
 import java.util.ArrayList;
 

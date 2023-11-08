@@ -1,3 +1,5 @@
+package Tiles;
+
 import java.awt.*;
 
 public class T_Wall extends Tile {

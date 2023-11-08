@@ -1,3 +1,7 @@
+package Model;
+
+import Tiles.Tile;
+import DataPackets.RenderInfo;
 import java.awt.*;
 import java.util.ArrayList;
 

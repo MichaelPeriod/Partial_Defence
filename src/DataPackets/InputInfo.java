@@ -1,8 +1,10 @@
+package DataPackets;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class InputInfo {
-    enum InputType {
+    public enum InputType {
         Click,
         ButtonPressed
     }

@@ -5,13 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab114fcc-5367-4e2a-ac83-b6ad9601d5b8" name="Changes" comment="Introduced inputs">
-      <change afterPath="$PROJECT_DIR$/src/InputInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Tilemap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Tiles/TileVariations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InputInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataPackets/InputInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RenderInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataPackets/RenderInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SpriteInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataPackets/SpriteInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SpriteSheetReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/SpriteSheetReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/T_Grass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles/T_Grass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/T_Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles/T_Wall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tiles/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tilemap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Tilemap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/res/SpriteSheet.ase" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/SpriteSheet.ase" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/res/SpriteSheet.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/SpriteSheet.png" afterDir="false" />
     </list>
@@ -82,7 +89,9 @@
       <updated>1699310250519</updated>
       <workItem from="1699310251807" duration="3235000" />
       <workItem from="1699384845151" duration="11559000" />
-      <workItem from="1699407574359" duration="5024000" />
+      <workItem from="1699407574359" duration="5168000" />
+      <workItem from="1699414393858" duration="1174000" />
+      <workItem from="1699451280992" duration="2031000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1699310590194</created>
@@ -105,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699397063659</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Introduced inputs">
+      <created>1699412766125</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1699412766125</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
