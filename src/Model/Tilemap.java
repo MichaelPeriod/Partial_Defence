@@ -1,7 +1,8 @@
 package Model;
 
-import Tiles.T_Grass;
-import Tiles.Tile;
+import Renderables.Tiles.AnimatedTile;
+import Renderables.Tiles.T_Grass;
+import Renderables.Tiles.Tile;
 import DataPackets.RenderInfo;
 
 import java.awt.*;
@@ -56,6 +57,10 @@ public class Tilemap {
         }
     }
 
+    public void setTileUpdate(Point pos, boolean updateStatus){
+        GetTile(pos).setNeedsRendered(updateStatus);
+    }
+
     public ArrayList<RenderInfo> getTileUpdates(){
         ArrayList<RenderInfo> toReturn = new ArrayList<>();
         for(Tile[] row : tiles){
@@ -67,5 +72,18 @@ public class Tilemap {
             }
         }
         return toReturn;
+    }
+
+    public void updateSprites(int updateNumber){
+        for(Tile[] row : tiles){
+            for(Tile tile : row){
+                if(tile != null){
+                    Class<? extends Tile> c = tile.getClass();
+                    if(AnimatedTile.class.isAssignableFrom(c)){
+                        ((AnimatedTile) tile).updateSprites(updateNumber);
+                    }
+                }
+            }
+        }
     }
 }

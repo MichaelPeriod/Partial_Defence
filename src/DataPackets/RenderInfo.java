@@ -18,4 +18,12 @@ public class RenderInfo {
     public Point getTilePosition() {
         return tilePosition;
     }
+
+    public void setSpritePosition(Point spritePosition) {
+        this.spritePosition = spritePosition;
+    }
+
+    public void setTilePosition(Point tilePosition) {
+        this.tilePosition = tilePosition;
+    }
 }

@@ -1,6 +1,6 @@
 package Model;
 
-import Tiles.Tile;
+import Renderables.Tiles.Tile;
 import DataPackets.RenderInfo;
 import java.awt.*;
 import java.util.ArrayList;
@@ -8,78 +8,95 @@ import java.util.ArrayList;
 public class Model {
     public enum Layer {
         Ground(0),
-        Main(1);
+        Structures(1),
+        Entities(2);
 
         public final int tilemapNum;
 
-        private Layer(int _tilemapNum){
+        private Layer(int _tilemapNum) {
             tilemapNum = _tilemapNum;
         }
 
-        public static Layer getLayer(int l){
-            for(Layer possibleLayer : Layer.values()){
-                if(possibleLayer.tilemapNum == l)
+        public static Layer getLayer(int l) {
+            for (Layer possibleLayer : Layer.values()) {
+                if (possibleLayer.tilemapNum == l)
                     return possibleLayer;
             }
-            return Main;
+            return Structures;
         }
 
-        public Layer getPreviousLayer(){
-            if(tilemapNum == 0)
+        public Layer getPreviousLayer() {
+            if (tilemapNum == 0)
                 return this;
             return getLayer(tilemapNum - 1);
         }
     }
+
     private final Point tileMapSize;
 
     private final ArrayList<Tilemap> tileMaps = new ArrayList<>(); //Drawn 0, 1, 2, ...
 
-    public Model(Point _tileMapSize){
+    public Model(Point _tileMapSize) {
         tileMapSize = _tileMapSize;
-        tileMaps.add(new Tilemap(tileMapSize));
-        tileMaps.add(new Tilemap(tileMapSize));
+        for(Layer l : Layer.values()){
+            tileMaps.add(new Tilemap(tileMapSize));
+        }
     }
 
-    public void Update(){
+    public void Update() {
 
     }
 
-    public Tilemap getTilemap(Layer layer){
+    public Tilemap getTilemap(Layer layer) {
         return tileMaps.get(layer.tilemapNum);
     }
 
-    public Tile getTile(Layer layer, Point pos){
-       return getTilemap(layer).GetTile(pos);
+    public Tile getTile(Layer layer, Point pos) {
+        return getTilemap(layer).GetTile(pos);
     }
 
-    public void setTile(Layer layer, Tile t){
+    public void setTile(Layer layer, Tile t) {
         getTilemap(layer).SetTile(t);
     }
 
-    public void clearTile(Layer layer, Point pos){
+    public void clearTile(Layer layer, Point pos) {
         getTilemap(layer).ClearTile(pos);
         getTile(layer.getPreviousLayer(), pos).setNeedsRendered(true);
     }
 
-    public ArrayList<RenderInfo> getTileUpdates(){
+    public void setTileUpdate(Layer layer, Point pos, boolean updateStatus) {
+        getTilemap(layer).setTileUpdate(pos, updateStatus);
+    }
+
+    public void setTileUpdate(Layer layer, Point pos) {
+        setTileUpdate(layer, pos, true);
+    }
+
+    public ArrayList<RenderInfo> getTileUpdates() {
         ArrayList<RenderInfo> toUpdate = new ArrayList<>();
-        for(int i = 0; i < tileMaps.size(); i++){
-            for(RenderInfo r : getTilemap(Layer.getLayer(i)).getTileUpdates()){
+        for (int i = 0; i < tileMaps.size(); i++) {
+            for (RenderInfo r : getTilemap(Layer.getLayer(i)).getTileUpdates()) {
                 toUpdate.add(r);
 
-                if(i > 0){
-                    Tile under = getTile(Layer.getLayer(i - 1), r.getTilePosition());
-                    if(under == null)
+                if (i > 0) {
+                    Tile under = getTile(Layer.getLayer(i).getPreviousLayer(), r.getTilePosition());
+                    if (under != null)
                         under.setNeedsRendered(true);
                 }
 
-                for(int j = i + 1; j < tileMaps.size(); j++){ //Render all tiles above
+                for (int j = i + 1; j < tileMaps.size(); j++) { //Render all tiles above
                     Tile t = getTile(Layer.getLayer(j), r.getTilePosition());
-                    if(t != null)
+                    if (t != null)
                         t.setNeedsRendered(true);
                 }
             }
         }
         return toUpdate;
+    }
+
+    public void updateSprites(int updateNumber) {
+        for (Layer l : Layer.values()) {
+            getTilemap(l).updateSprites(updateNumber);
+        }
     }
 }

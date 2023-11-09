@@ -4,13 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab114fcc-5367-4e2a-ac83-b6ad9601d5b8" name="Changes" comment="Refactored file structure then added tile variations">
+    <list default="true" id="ab114fcc-5367-4e2a-ac83-b6ad9601d5b8" name="Changes" comment="Adding and deleting tiles now functions">
+      <change afterPath="$PROJECT_DIR$/src/Renderables/Renderable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Renderables/Tiles/AnimatedTile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Renderables/Tiles/T_Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/res/ArtTest/PartialDefenceArtTest.ase" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/res/ArtTest/resurrect-64.gpl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataPackets/RenderInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataPackets/RenderInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Model.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Tilemap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Tilemap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tiles/TileVariations.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tiles/T_Grass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renderables/Tiles/T_Grass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tiles/T_Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renderables/Tiles/T_Wall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tiles/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renderables/Tiles/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Client.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +28,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -55,6 +63,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="Renderables" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Application" />
@@ -81,7 +94,9 @@
       <workItem from="1699384845151" duration="11559000" />
       <workItem from="1699407574359" duration="5168000" />
       <workItem from="1699414393858" duration="1174000" />
-      <workItem from="1699451280992" duration="6079000" />
+      <workItem from="1699451280992" duration="6725000" />
+      <workItem from="1699487690869" duration="373000" />
+      <workItem from="1699561381831" duration="5177000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1699310590194</created>
@@ -118,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699454642008</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Adding and deleting tiles now functions">
+      <created>1699458724451</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1699458724451</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,7 +176,8 @@
     <MESSAGE value="Got basic rendering system functional" />
     <MESSAGE value="Introduced inputs" />
     <MESSAGE value="Refactored file structure then added tile variations" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored file structure then added tile variations" />
+    <MESSAGE value="Adding and deleting tiles now functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding and deleting tiles now functions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -163,6 +186,16 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/View/SpriteSheetReader.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Renderables/Tiles/AnimatedTile.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

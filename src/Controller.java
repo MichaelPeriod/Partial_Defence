@@ -1,6 +1,7 @@
 import DataPackets.*;
 import Model.Model;
-import Tiles.T_Wall;
+import Renderables.Tiles.T_Test;
+import Renderables.Tiles.T_Wall;
 import View.GameView;
 
 import javax.swing.*;
@@ -9,7 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.Queue;
 
 public class Controller implements Runnable {
-    private final int tickRate = 128;
+    private final int tickRate = 60;
     private final Point tileMapSize = new Point(16, 9);
     private final boolean isRunning = true;
 
@@ -29,8 +30,8 @@ public class Controller implements Runnable {
         //Build Model.Model and View
         model = new Model(tileMapSize);
         model.getTilemap(Model.Layer.Ground).GrassFill();
+        model.setTile(Model.Layer.Entities, new T_Test(new Point(4,4)));
 
-        view.Setup();
 
         Thread tickThread = new Thread(this);
         tickThread.start();
@@ -43,6 +44,7 @@ public class Controller implements Runnable {
         long lastTime = System.nanoTime();
         long currentTime;
         long timer;
+        int ticksRan = 0;
 
         while(isRunning){
             //Get time
@@ -56,10 +58,11 @@ public class Controller implements Runnable {
 
             HandleInputs();
             model.Update();
-            UpdateScreen();
+            UpdateScreen(ticksRan);
 
             //Draw frame and restart time till next frame
             delta--;
+            ticksRan++;
         }
     }
 
@@ -75,19 +78,23 @@ public class Controller implements Runnable {
                     Point tilePos = view.screenPosToTilePos(screenPos);
 
                     if(i.mouseEvent.getButton() == MouseEvent.BUTTON1)
-                        model.setTile(Model.Layer.Main, new T_Wall(tilePos));
+                        model.setTile(Model.Layer.Structures, new T_Wall(tilePos));
                     else if(i.mouseEvent.getButton() == MouseEvent.BUTTON3) {
-                        model.clearTile(Model.Layer.Main, tilePos);
+                        model.clearTile(Model.Layer.Structures, tilePos);
                     }
                 }
             }
         }
     }
 
-    private void UpdateScreen(){
+    private void UpdateScreen(int totalTicks){
+        model.updateSprites(totalTicks);
+
         for(RenderInfo renderInfo : model.getTileUpdates()){
             view.addToQueue(renderInfo);
         }
+
+        view.repaint();
     }
 
     @Override
