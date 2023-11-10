@@ -1,6 +1,5 @@
 package Model;
 
-import Renderables.Tiles.AnimatedTile;
 import Renderables.Tiles.T_Grass;
 import Renderables.Tiles.Tile;
 import DataPackets.RenderInfo;
@@ -78,10 +77,7 @@ public class Tilemap {
         for(Tile[] row : tiles){
             for(Tile tile : row){
                 if(tile != null){
-                    Class<? extends Tile> c = tile.getClass();
-                    if(AnimatedTile.class.isAssignableFrom(c)){
-                        ((AnimatedTile) tile).updateSprites(updateNumber);
-                    }
+                    tile.updateSprites(updateNumber);
                 }
             }
         }

@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class T_Test extends AnimatedTile{
+public class T_Test extends Tile {
     private static final ArrayList<Point> spritePos = new ArrayList<>(Arrays.asList(
             new Point(2, 1),
             new Point(2, 0)

@@ -16,6 +16,10 @@ public abstract class Tile extends Renderable {
         this(chooseRandomSprite(_spritePoses), _tilePos);
     }
 
+    public Tile(ArrayList<Point> _spritesPos, Point _tilePos, int _updateFrequency){
+        super(_spritesPos, _tilePos, _updateFrequency);
+    }
+
     private static Point chooseRandomSprite(ArrayList<Point> tiles){
         return tiles.get(new Random().nextInt(0, tiles.size()));
     }
