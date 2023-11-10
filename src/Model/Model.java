@@ -74,24 +74,26 @@ public class Model {
 
     public ArrayList<RenderInfo> getTileUpdates() {
         ArrayList<RenderInfo> toUpdate = new ArrayList<>();
+        setRenderStacks();
+
         for (int i = 0; i < tileMaps.size(); i++) {
             for (RenderInfo r : getTilemap(Layer.getLayer(i)).getTileUpdates()) {
                 toUpdate.add(r);
+            }
+        }
+        return toUpdate;
+    }
 
-                if (i > 0) {
-                    Tile under = getTile(Layer.getLayer(i).getPreviousLayer(), r.getTilePosition());
-                    if (under != null)
-                        under.setNeedsRendered(true);
-                }
-
-                for (int j = i + 1; j < tileMaps.size(); j++) { //Render all tiles above
+    private void setRenderStacks(){
+        for(Layer l : Layer.values()) {
+            for (RenderInfo r : getTilemap(l).getTileUpdates()) {
+                for (int j = 0; j < tileMaps.size(); j++) { //Render all tiles in stack
                     Tile t = getTile(Layer.getLayer(j), r.getTilePosition());
                     if (t != null)
                         t.setNeedsRendered(true);
                 }
             }
         }
-        return toUpdate;
     }
 
     public void updateSprites(int updateNumber) {

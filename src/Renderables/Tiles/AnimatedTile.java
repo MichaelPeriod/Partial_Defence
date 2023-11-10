@@ -25,7 +25,7 @@ public class AnimatedTile extends Tile {
 
     public void updateSprites(int updateNumber){
         if(updateNumber % updateFrequency == 0){
-            System.out.println(sprites.get(currentSprite % sprites.size()).toString());
+            currentSprite++;
             setSprite(sprites.get(currentSprite % sprites.size()));
         }
     }
