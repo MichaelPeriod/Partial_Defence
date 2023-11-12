@@ -9,6 +9,7 @@ public class Application {
         window.setResizable(false);
         window.setTitle("Partial Defence");
 
+        //Start application from controller
         new Controller(window);
     }
 }

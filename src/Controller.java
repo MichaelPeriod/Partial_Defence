@@ -9,14 +9,20 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.Queue;
 
+/*
+* Controller of the MVC
+* Application entry point
+* */
 public class Controller implements Runnable {
+    //Get final variables
     private final int tickRate = 60;
     private final Point tileMapSize = new Point(16, 9);
-    private final boolean isRunning = true;
 
+    //Store model and view
     private final GameView view;
     private final Model model;
 
+    //Constructor
     public Controller(JFrame window){
         //Add a window to console
         view = new GameView(tileMapSize);
@@ -27,14 +33,19 @@ public class Controller implements Runnable {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-        //Build Model.Model and View
+        //Build Model
         model = new Model(tileMapSize);
-        model.getTilemap(Model.Layer.Ground).GrassFill();
-        model.setTile(Model.Layer.Entities, new T_Test(new Point(4,4)));
+        model.getTilemap(Model.Layer.Ground).grassFill();
 
-
+        //Start as new thread
         Thread tickThread = new Thread(this);
-        tickThread.start();
+        tickThread.start(); //Calls run on new thread
+    }
+
+    @Override
+    public void run() {
+        //Function that runs every tick
+        gameTick();
     }
 
     private void gameTick(){ //Runs every tick
@@ -46,7 +57,8 @@ public class Controller implements Runnable {
         long timer;
         int ticksRan = 0;
 
-        while(isRunning){
+        //Loop for entire duration of game
+        while(true){
             //Get time
             currentTime = System.nanoTime();
 
@@ -56,9 +68,10 @@ public class Controller implements Runnable {
             lastTime = currentTime;
             if(delta <= 1) continue;
 
-            HandleInputs();
-            model.Update();
-            UpdateScreen(ticksRan);
+            //Run game functions
+            handleInputs();
+            model.update();
+            updateScreen(ticksRan);
 
             //Draw frame and restart time till next frame
             delta--;
@@ -66,12 +79,15 @@ public class Controller implements Runnable {
         }
     }
 
-    private void HandleInputs(){
+    private void handleInputs(){
+        //Get inputs from view
         Queue<InputInfo> inputs = view.getInputQueue();
 
         while(!inputs.isEmpty()){
+            //Check each input
             InputInfo i = inputs.poll();
 
+            //Send action to Model to act upon the input
             switch (i.input){
                 case Click -> {
                     Point screenPos = i.mouseEvent.getPoint();
@@ -87,18 +103,16 @@ public class Controller implements Runnable {
         }
     }
 
-    private void UpdateScreen(int totalTicks){
+    private void updateScreen(int totalTicks){
+        //Prompt sprites to see if update is wanted
         model.updateSprites(totalTicks);
 
+        //Transfer all render information to the view
         for(RenderInfo renderInfo : model.getTileUpdates()){
-            view.addToQueue(renderInfo);
+            view.addToRenderQueue(renderInfo);
         }
 
+        //Draw the updates
         view.repaint();
-    }
-
-    @Override
-    public void run() {
-        gameTick();
     }
 }

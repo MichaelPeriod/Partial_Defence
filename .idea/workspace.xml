@@ -4,11 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab114fcc-5367-4e2a-ac83-b6ad9601d5b8" name="Changes" comment="Completed animated tiles, might compress into renderable">
+    <list default="true" id="ab114fcc-5367-4e2a-ac83-b6ad9601d5b8" name="Changes" comment="Refactored animated tile into renderable">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataPackets/InputInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataPackets/InputInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataPackets/RenderInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataPackets/RenderInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataPackets/SpriteInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Tilemap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Tilemap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Renderables/Renderable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renderables/Renderable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Renderables/Tiles/AnimatedTile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Renderables/Tiles/T_Grass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renderables/Tiles/T_Grass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Renderables/Tiles/T_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renderables/Tiles/T_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Renderables/Tiles/T_Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renderables/Tiles/T_Wall.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Renderables/Tiles/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Renderables/Tiles/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/GameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/GameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/SpriteSheetReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/SpriteSheetReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/ArtTest/PartialDefenceArtTest.ase" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/ArtTest/PartialDefenceArtTest.ase" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/SpriteSheet.ase" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/SpriteSheet.ase" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/SpriteSheet.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/SpriteSheet.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +103,9 @@
       <workItem from="1699487690869" duration="373000" />
       <workItem from="1699561381831" duration="5210000" />
       <workItem from="1699575288267" duration="556000" />
-      <workItem from="1699627644615" duration="1653000" />
+      <workItem from="1699627644615" duration="2335000" />
+      <workItem from="1699721149033" duration="30000" />
+      <workItem from="1699754579542" duration="5297000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1699310590194</created>
@@ -146,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699628757562</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Refactored animated tile into renderable">
+      <created>1699629389235</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1699629389235</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,7 +209,8 @@
     <MESSAGE value="Adding and deleting tiles now functions" />
     <MESSAGE value="Started work on animating tiles" />
     <MESSAGE value="Completed animated tiles, might compress into renderable" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed animated tiles, might compress into renderable" />
+    <MESSAGE value="Refactored animated tile into renderable" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored animated tile into renderable" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
