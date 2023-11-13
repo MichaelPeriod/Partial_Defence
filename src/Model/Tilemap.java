@@ -1,8 +1,8 @@
 package Model;
 
-import Renderables.Tiles.T_Grass;
 import Renderables.Tiles.Tile;
 import DataPackets.RenderInfo;
+import Renderables.Tiles.TileBuilder;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -29,15 +29,28 @@ public class Tilemap {
     }
 
     //Utility
-    public void grassFill(){
+    public void fill(TileBuilder t){
         for(int i = 0; i < mapSize.x; i++){
             for(int j = 0; j < mapSize.y; j++){
                 Point pos = new Point(i, j);
-                setTile(new T_Grass(pos));
+                setTile(t, pos);
             }
         }
     }
 
+    public void loadMap(TileBuilder[][] _newMap){
+        for(int i = 0; i < mapSize.x; i++){
+            for(int j = 0; j < mapSize.y; j++){
+                //Ignore spots not on new map
+                if(_newMap.length < i ||
+                   _newMap[0].length < j) continue;
+
+                setTile(_newMap[i][j], new Point(i, j));
+            }
+        }
+    }
+
+    //Handle tile updates
     public void setTileUpdate(Point pos, boolean updateStatus){
         //Make tile update
         getTile(pos).setNeedsRendered(updateStatus);
@@ -78,17 +91,10 @@ public class Tilemap {
         return tiles[pos.x][pos.y];
     }
 
-    public void setTile(Tile t){
-        if(t.getTilePos().x >= mapSize.x || t.getTilePos().x < 0 ||
-                t.getTilePos().y < 0 || t.getTilePos().y >= mapSize.y)
-            return;
-        tiles[t.getTilePos().x][t.getTilePos().y] = t;
-    }
-
-    public void clearTile(Point pos){
+    public void setTile(TileBuilder t, Point pos){
         if(pos.x >= mapSize.x || pos.x < 0 ||
                 pos.y < 0 || pos.y >= mapSize.y)
             return;
-        tiles[pos.x][pos.y] = null;
+        tiles[pos.x][pos.y] = TileBuilder.build(t, pos);
     }
 }

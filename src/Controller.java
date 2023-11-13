@@ -1,8 +1,8 @@
 import DataPackets.*;
 import Model.Model;
-import Renderables.Tiles.T_Test;
-import Renderables.Tiles.T_Wall;
+import Renderables.Tiles.TileBuilder;
 import View.GameView;
+import Model.MazeGenerator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +35,6 @@ public class Controller implements Runnable {
 
         //Build Model
         model = new Model(tileMapSize);
-        model.getTilemap(Model.Layer.Ground).grassFill();
 
         //Start as new thread
         Thread tickThread = new Thread(this);
@@ -56,6 +55,8 @@ public class Controller implements Runnable {
         long currentTime;
         long timer;
         int ticksRan = 0;
+
+        //TODO: Add delay before first render to ensure tiles are initialized before first display
 
         //Loop for entire duration of game
         while(true){
@@ -94,9 +95,9 @@ public class Controller implements Runnable {
                     Point tilePos = view.screenPosToTilePos(screenPos);
 
                     if(i.mouseEvent.getButton() == MouseEvent.BUTTON1)
-                        model.setTile(Model.Layer.Structures, new T_Wall(tilePos));
+                        model.setTile(Model.Layer.Structures, TileBuilder.Wall, tilePos);
                     else if(i.mouseEvent.getButton() == MouseEvent.BUTTON3) {
-                        model.clearTile(Model.Layer.Structures, tilePos);
+                        model.setTile(Model.Layer.Structures, TileBuilder.Empty, tilePos);
                     }
                 }
             }

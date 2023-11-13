@@ -2,6 +2,8 @@ package Model;
 
 import Renderables.Tiles.Tile;
 import DataPackets.RenderInfo;
+import Renderables.Tiles.TileBuilder;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -44,15 +46,35 @@ public class Model {
     //Stores all tilemaps
     private final ArrayList<Tilemap> tileMaps = new ArrayList<>(); //Drawn 0, 1, 2, ...
 
+    private final MazeGenerator mazeGenerator;
+
     public Model(Point _tileMapSize) {
         //Make a tilemap for each layer
         for(Layer l : Layer.values()){
             tileMaps.add(new Tilemap(_tileMapSize));
         }
+
+        fill(Layer.Ground, TileBuilder.Grass);
+
+        mazeGenerator = new MazeGenerator(_tileMapSize);
+        generateNewMaze(Layer.Structures);
     }
 
     public void update() {
         //Update the game state once every tick
+    }
+
+    //Utilities
+    public void fill(Layer l, TileBuilder t){
+        getTilemap(l).fill(t);
+    }
+
+    public void loadMap(Layer l, TileBuilder[][] t){
+        getTilemap(l).loadMap(t);
+    }
+
+    public void generateNewMaze(Layer l){
+        loadMap(l, mazeGenerator.generate());
     }
 
     //Update any sprites based on tick number
@@ -104,7 +126,7 @@ public class Model {
     }
 
     //Tilemap getters and setters
-    public Tilemap getTilemap(Layer layer) {
+    private Tilemap getTilemap(Layer layer) {
         return tileMaps.get(layer.tilemapNum);
     }
 
@@ -112,14 +134,7 @@ public class Model {
         return getTilemap(layer).getTile(pos);
     }
 
-    public void setTile(Layer layer, Tile t) {
-        getTilemap(layer).setTile(t);
+    public void setTile(Layer layer, TileBuilder t, Point pos) {
+        getTilemap(layer).setTile(t, pos);
     }
-
-    public void clearTile(Layer layer, Point pos) {
-        //Used specifically to ensure the layer underneath is redrawn
-        getTilemap(layer).clearTile(pos);
-        getTile(layer.getPreviousLayer(), pos).setNeedsRendered(true);
-    }
-
 }
