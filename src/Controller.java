@@ -17,7 +17,7 @@ import java.util.Queue;
 public class Controller extends Thread {
     //Get final variables
     private final int tickRate = 60;
-    private final Point tileMapSize = new Point(16, 9);
+    private final Point tileMapSize = new Point(15, 9);
 
     //Store model and view
     private final Thread tickThread;
@@ -98,13 +98,12 @@ public class Controller extends Thread {
             //Send action to Model to act upon the input
             switch (i.input){
                 case Click -> {
-                    Point screenPos = i.mouseEvent.getPoint();
-                    Point tilePos = view.screenPosToTilePos(screenPos);
+                    //Point screenPos = i.mouseEvent.getPoint();
+                    //Point tilePos = view.screenPosToTilePos(screenPos);
 
-                    if(i.mouseEvent.getButton() == MouseEvent.BUTTON1)
-                        model.setTile(Model.Layer.Structures, TileBuilder.Wall, tilePos);
-                    else if(i.mouseEvent.getButton() == MouseEvent.BUTTON3) {
-                        model.setTile(Model.Layer.Structures, TileBuilder.Empty, tilePos);
+                    if(i.mouseEvent.getButton() == MouseEvent.BUTTON1){
+                        model.fill(Model.Layer.Structures, TileBuilder.Empty);
+                        model.generateNewMaze(Model.Layer.Structures);
                     }
                 }
             }

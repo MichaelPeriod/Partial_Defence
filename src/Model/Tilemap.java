@@ -95,6 +95,9 @@ public class Tilemap {
         if(pos.x >= mapSize.x || pos.x < 0 ||
                 pos.y < 0 || pos.y >= mapSize.y)
             return;
+        if(t == null)
+            t = TileBuilder.Empty;
+
         tiles[pos.x][pos.y] = TileBuilder.build(t, pos);
     }
 }
