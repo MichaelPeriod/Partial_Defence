@@ -136,5 +136,7 @@ public class Model {
 
     public void setTile(Layer layer, TileBuilder t, Point pos) {
         getTilemap(layer).setTile(t, pos);
+        if(t == TileBuilder.Empty)
+            setTileUpdate(Layer.Ground, pos);
     }
 }

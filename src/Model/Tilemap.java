@@ -64,7 +64,7 @@ public class Tilemap {
             for(Tile tile : row){
                 if(tile != null && tile.getNeedsRendered()) {
                     toReturn.add(tile.getRenderInfo());
-                    setTileUpdate(tile.getTilePos(), true);
+                    setTileUpdate(tile.getTilePos(), false);
                 }
             }
         }

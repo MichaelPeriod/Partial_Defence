@@ -7,18 +7,20 @@ import Model.MazeGenerator;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Queue;
 
 /*
 * Controller of the MVC
 * Application entry point
 * */
-public class Controller implements Runnable {
+public class Controller extends Thread {
     //Get final variables
     private final int tickRate = 60;
     private final Point tileMapSize = new Point(16, 9);
 
     //Store model and view
+    private final Thread tickThread;
     private final GameView view;
     private final Model model;
 
@@ -37,7 +39,7 @@ public class Controller implements Runnable {
         model = new Model(tileMapSize);
 
         //Start as new thread
-        Thread tickThread = new Thread(this);
+        tickThread = new Thread(this);
         tickThread.start(); //Calls run on new thread
     }
 
@@ -47,7 +49,7 @@ public class Controller implements Runnable {
         gameTick();
     }
 
-    private void gameTick(){ //Runs every tick
+    private void gameTick() { //Runs every tick
         //Declare variables
         final double tickInterval = 1000000000/(float)tickRate;
         double delta = 0;
@@ -56,7 +58,12 @@ public class Controller implements Runnable {
         long timer;
         int ticksRan = 0;
 
-        //TODO: Add delay before first render to ensure tiles are initialized before first display
+        //Delay before running game to allow for completion of all tiles initializing
+//        while (true){
+//            currentTime = System.nanoTime();
+//            if(currentTime - lastTime > 100)
+//                break;
+//        }
 
         //Loop for entire duration of game
         while(true){
