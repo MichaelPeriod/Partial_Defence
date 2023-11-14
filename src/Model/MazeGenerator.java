@@ -9,46 +9,159 @@ import java.util.*;
 /*
 * Used to design map for creatures
 * */
+
+/*
+* Map generation:
+* Find valid starting points
+*   designate into quadrants
+*   select spots on edge
+* Find center
+* Start DFS traveling for each path
+*   weight towards center
+*   if hit other path travel back in dfs randomly
+*   add path to list of paths
+* Make each path
+* */
+
 public class MazeGenerator {
     private final int centerReservedSpots = 3;
     private final int designatedPathways = 4;
     private TileBuilder[][] map;
-    public MazeGenerator(@NotNull Point _mazeSize){
+
+    public MazeGenerator(@NotNull Point _mazeSize) {
         map = new TileBuilder[_mazeSize.x][_mazeSize.y];
     }
 
-    public TileBuilder[][] generate(){
+    public TileBuilder[][] generate() {
         clearMap();
         Point starts[] = selectStartingPositions();
-        Point center[] = getCenter();
-        HashMap<Integer, Point> allWalkways = new HashMap<>();
-        for(Point start : starts){
-            HashMap<Integer, Point> currentWalkway = new HashMap<>();
-            Stack<Point> stack = new Stack<>();
-            stack.push(start);
-            currentWalkway.put(start.y * map.length + start.x, start);
-
-            while(!pointWithinRange(stack.peek(), center)){
-                Point curr = stack.peek();
-                //continue
-                //Map inspiration in art test
+        Point center[][] = getCenter();
+        ArrayList<Point> allPaths = new ArrayList<>();
+        for (Point start : starts) {
+            for (Point p : generatePath(start, center)) {
+                allPaths.add(p);
             }
-//            while(!stack.peek().equals())
-            //DFS till located center
-            //If within that process another path is hit,
-            //Save and backtrack some number of positions
         }
 
-        for(Point pos : getCenter()){
+        for (Point pos : allPaths) {
             map[pos.y][pos.x] = TileBuilder.Empty;
         }
 
         return map;
     }
 
-    private boolean pointWithinRange(Point curr, Point[] goal){
-        return (curr.x >= goal[0].x && curr.x <= goal[goal.length - 1].x &&
-                curr.y >= goal[0].y && curr.y <= goal[goal.length - 1].y);
+    private ArrayList<Point> generatePath(Point start, Point[][] goal) {
+        //Try more to generate basic paths ignoring collision
+
+        ArrayList<Point> path = new ArrayList<>();
+
+        Point goalCenter = goal[goal.length / 2][goal[0].length / 2];
+
+        final int maxTravel = 4;
+
+        Point currentPos = start;
+        Point lastPos = currentPos;
+        Point momentum = new Point(0, 0);
+        while (!pointWithinRange(currentPos, goal)) {
+            path.add(lastPos);
+            if (momentum.x == 0 && momentum.y == 0) {
+                if(Math.random() < .35){ //random direction
+                    double dir = Math.random();
+                    if(dir < .25){
+                        momentum.x -= Math.random() * maxTravel;
+                    } else if(dir < .5){
+                        momentum.x += Math.random() * maxTravel;
+                    } else if(dir < .75){
+                        momentum.y -= Math.random() * maxTravel;
+                    } else {
+                        momentum.y += Math.random() * maxTravel;
+                    }
+
+                    if(momentum.x + currentPos.x > map[0].length - 1 ||
+                            momentum.x + currentPos.x < 0 ||
+                            momentum.y + currentPos.y > map.length - 1 ||
+                            momentum.y + currentPos.y < 0) {
+
+                        momentum = new Point(0,0);
+                        continue;
+                    }
+
+                } else if (Math.abs(currentPos.x - goalCenter.x) > Math.abs(currentPos.y - goalCenter.y)) {
+                    if (currentPos.x > goalCenter.x) {
+                        momentum.x -= Math.random() * maxTravel;
+                    } else {
+                        momentum.x += Math.random() * maxTravel;
+                    }
+                } else {
+                    if (currentPos.y > goalCenter.y) {
+                        momentum.y -= Math.random() * maxTravel;
+                    } else {
+                        momentum.y += Math.random() * maxTravel;
+                    }
+                }
+            }
+
+            if (momentum.x > 0) {
+                currentPos.translate(1, 0);
+                momentum.translate(-1, 0);
+            } else if (momentum.x < 0){
+                currentPos.translate(-1, 0);
+                momentum.translate(1, 0);
+            }else if (momentum.y > 0){
+                currentPos.translate(0, 1);
+                momentum.translate(0, -1);
+            }else{
+                currentPos.translate(0,-1);
+                momentum.translate(0, 1);
+            }
+
+            //Add points between the before and after
+            //Sometimes just go a random direction
+
+            lastPos = new Point(currentPos);
+
+            //            if(currentPos.x < 0 || currentPos.x >= map[0].length ||
+//               currentPos.y < 0 || currentPos.y >= map.length)
+//                currentPos = lastPos;
+//            else
+//                path.add(currentPos);
+//
+//            //calculate weights
+//            double totalDistance = currentPos.distance(goal);
+//            double weightX = 0, weightY = 0;
+//            if(Math.abs(currentPos.x - goal.x) > Math.abs(currentPos.y - goal.y)){
+//                weightX = totalDistance / map.length;
+//                if(currentPos.x - goal.x > 0)
+//                    weightX *= -1;
+//            } else {
+//                weightY = totalDistance / map[0].length;
+//                if(currentPos.y - goal.y > 0)
+//                    weightY *= -1;
+//            }
+//
+//            //Select direction randomly
+//            double directionX = (2*(Math.random() - .5)) + weightX;
+//            double directionY = (2*(Math.random() - .5)) + weightY;
+//            int i = 0;
+//            if(Math.abs(directionX) > Math.abs(directionY)){
+//                if(directionX > 0)
+//                    currentPos = new Point(currentPos.x + 1, currentPos.y);
+//                else
+//                    currentPos = new Point(currentPos.x - 1, currentPos.y);
+//            } else {
+//                if(directionY > 0)
+//                    currentPos = new Point(currentPos.x, currentPos.y + 1);
+//                else
+//                    currentPos = new Point(currentPos.x, currentPos.y - 1);
+//            }
+        }
+
+        return path;
+    }
+
+    private boolean pointWithinRange(Point curr, Point[][] goal){
+        return (curr.x >= goal[0][0].x && curr.x <= goal[goal.length - 1][goal[0].length - 1].x &&
+                curr.y >= goal[0][0].y && curr.y <= goal[goal.length - 1][goal[0].length - 1].y);
     }
 
     private Point[] selectStartingPositions(){
@@ -122,8 +235,8 @@ public class MazeGenerator {
         return pos;
     }
 
-    private Point[] getCenter(){
-        Point toReturn[] = new Point[centerReservedSpots * centerReservedSpots];
+    private Point[][] getCenter(){
+        Point toReturn[][] = new Point[centerReservedSpots][centerReservedSpots];
         Point centerPoint =
                 new Point(
                         Math.ceilDiv(map[0].length, 2),
@@ -139,7 +252,7 @@ public class MazeGenerator {
 
         for(int i = topLeft.y; i < bottomRight.y; i++){
             for(int j = topLeft.x; j < bottomRight.x; j++){
-                toReturn[(i - topLeft.y) * centerReservedSpots + (j - topLeft.x)] = new Point(j, i);
+                toReturn[j - topLeft.x][i - topLeft.y] = new Point(j, i);
             }
         }
 
